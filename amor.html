@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti Mi Cuchurrumi ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff5f9e, #ff8fcf);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    color: white;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.25);
+    animation: aparecer 1.5s ease;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+}
+
+#saludo {
+    font-size: 1em;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+#mensaje {
+    font-size: 1.15em;
+    line-height: 1.8;        /* separa líneas */
+    letter-spacing: 0.6px;  /* separa letras */
+    min-height: 130px;
+    white-space: pre-line;
+}
+
+
+
+#contador {
+    margin-top: 15px;
+    font-size: 0.95em;
+    opacity: 0.85;
+}
+
+button {
+    margin-top: 25px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 40px;
+    background: #fff;
+    color: #ff3f88;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#mensaje {
+    font-style: italic;
+}
+
+button:hover {
+    transform: scale(1.08);
+    background: #ffe1ef;
+}
+
+img {
+    width: 100%;
+    border-radius: 18px;
+    margin-top: 20px;
+    display: none;
+}
+
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: subir 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes subir {
+    from { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Para ti ❤️</h1>
+    <div id="saludo"></div>
+    <div id="mensaje"></div>
+    <div id="contador"></div>
+
+    <button onclick="iniciar()">Presiona aquí corazon de melon 💕</button>
+
+    <!-- FOTO OPCIONAL -->
+    <img id="foto" src="amor.jpeg" alt="Nosotros" width="500px" height="500px">
+</div>
+
+<audio id="musica" loop>
+    <source src="likeher.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// MENSAJE SEGÚN LA HORA
+const hora = new Date().getHours();
+let saludo = "Hola amor 💖";
+if (hora < 12) saludo = "Olaa mi amor buenos días ☀️";
+else if (hora < 18) saludo = "Olaaaa mi amor buenas tardes💕";
+else saludo = "Buenas noches, amor 🌙";
+document.getElementById("saludo").innerText = saludo;
+
+// TEXTO ANIMADO
+const texto =
+"MI-AMOR-ME-ENAMORAS-CADA-DÍA-MAS-TE-ADORO-CON-TODO-MI-CORAZÓN,\n" +
+"TU-ERES-MI-LUGAR-SEGURO-CONTIGO-ME-SIENTO-MUY-BIEN,\n" +
+"QUIERO-PASAR-CONTIGO-HASTA-EL-DÍA-DE-MI-MUERTE...\n\n" +
+"ESTAR-EN-LO-SIMPLE,\n" +
+"EN-LO-DIFICIL,\n" +
+"EN-TODO...\n\n" +
+
+"Te-elijo-siempre-mi-niña ❤️";
+
+
+let i = 0;
+function escribir() {
+    if (i < texto.length) {
+        document.getElementById("mensaje").innerText += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 45);
+    }
+}
+
+// CONTADOR DE DÍAS (CAMBIA LA FECHA)
+const inicio = new Date("2024-12-11");
+function actualizarContador() {
+    const hoy = new Date();
+    const dias = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+    document.getElementById("contador").innerText =
+        "Han pasado " + dias + " días desde que te conocí 💞";
+}
+actualizarContador();
+
+// INICIAR TODO
+function iniciar() {
+    document.getElementById("musica").play();
+    escribir();
+    document.getElementById("foto").style.display = "block";
+}
+
+// CORAZONES
+function crearCorazon() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (14 + Math.random() * 28) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+}
+setInterval(crearCorazon, 350);
+</script>
+
+</body>
+</html>
